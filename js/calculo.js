@@ -1,7 +1,7 @@
 (function () {
     var MIN_ALLOWED             = 200000;
     var HIGH_VALUE              = 1500000;
-    var TASA_EA                 = 40.55 / 100;
+    var TASA_EA                 = 80.55 / 100;
     var TASA_MENSUAL            = Math.pow(1 + TASA_EA, 1 / 12) - 1;
     var FIANZA_INITIAL_RATE     = 5 / 100;
     var FIANZA_REGULAR_RATE     = 0.032;
