@@ -1,7 +1,7 @@
 (function () {
     var MIN_ALLOWED             = 200000;
     var HIGH_VALUE              = 1500000;
-    var TASA_EA                 = 28.79 / 100;
+    var TASA_EA                 = 40.55 / 100;
     var TASA_MENSUAL            = Math.pow(1 + TASA_EA, 1 / 12) - 1;
     var FIANZA_INITIAL_RATE     = 5 / 100;
     var FIANZA_REGULAR_RATE     = 0.032;
@@ -39,7 +39,7 @@
     var infoDataButton          = document.getElementById('info-data-btn');
     var infoDataPanel           = document.getElementById('info-data-panel');
 
-    if (!amountInput || !monthsInput || !minAlert || !amountDisplay || !amountCard || !installmentDisplay || !initialBondDisplay || !regularBondDisplay || !interestDisplay || !insuranceDisplay || !adm[...]
+    if (!amountInput || !monthsInput || !minAlert || !amountDisplay || !amountCard || !installmentDisplay || !initialBondDisplay || !regularBondDisplay || !interestDisplay || !insuranceDisplay || !adminFeeDisplay || !disbursedDisplay || !summarySection || !summaryStartDisplay || !summaryRecurringLabel || !summaryRecurringDisplay || !initialRateDisplay || !ivaRateDisplay || !regularRateDisplay || !regularIvaRateDisplay || !monthlyRateDisplay || !insuranceRateDisplay) {
         return;
     }
 
