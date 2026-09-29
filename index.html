@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Simulador Rotativo</title>
+        <link rel="stylesheet" href="../css/Estilo.css">
+    </head>
+
+    <body>
+
+        <!-- VALOR / PLAZO -->
+        <div class="container">
+            <img src="https://portal.ris.com.co/assets/ris-5738fc3d3c77673f4ab1bf07a15fdc550701b49406b0c8a8a618f75abfdba546.png" alt="logo-ris">
+            <h2>¡Simula tu crédito Cupo Rotativo!</h2>
+            <p class="text__center text-ris">Selecciona la mejor opción de plazo</p>
+            <h4 class="text__center">¿Cuánto dinero necesitas?</h4>
+            <h3 class="monto">
+                <strong id="monto-valor">$200.000</strong>
+            </h3>
+        </div>
+
+        <div class="form-row">
+
+            <div class="field">
+                <h4 class="text__center">Valor</h4>
+                <input id="monto__input" class="input" type="text" placeholder="$200.000" inputmode="numeric" autocomplete="off" data-max="$3.500.000">
+                <div class="hint">Mínimo: $200.000 - Máximo: $3.500.000</div>
+            </div>
+
+            <div class="field field--floating">
+                <h4 class="text__center">Plazo en meses</h4>
+                <div class="slider-group">
+                    <input id="plazo__input" class="input input--range" type="range" min="1" max="12" step="1" value="1" aria-label="Plazo en meses">
+                    <div class="slider-value">
+                        <span>Mes seleccionado:</span>
+                        <strong id="plazo__value">1</strong>
+                    </div>
+                </div>
+                <span id="months-alert" class="floating-input-alert">Ingresa mínimo 1 mes y máximo 12</span>
+                <div class="hint">1 a 12 meses</div>
+            </div>
+        </div>
+
+        <!-- ============ ALERTAS DE MONTO MINIMO =========== -->
+        <div id="min-alert" class="min-alert">
+            ⚠️ El valor mínimo es $200.000. Los cálculos se están realizando sobre este monto.
+        </div>
+
+        <div id="summary-section" class="Summary" hidden>
+            <h3 class="text__center text-ris">Resumen de la simulación</h3>
+            <div class="summary__rows">
+                <p>
+                    <span>Cuota 1:</span>
+                    <strong id="summary__cuota_inicio">$0,00</strong>
+                </p>
+                <p hidden>
+                    <span id="summary__cuota_label">Cuota 2 a 1:</span>
+                    <strong id="summary__cuota_restante">$0,00</strong>
+                </p>
+                <p>
+                    <span>Cuota de administración:</span>
+                    <strong id="summary__admin_fee">$0,00</strong>
+                </p>
+                <p>
+                    <span>Seguro mensual:</span>
+                    <strong id="summary__insurance">$0,00</strong>
+                </p>
+            </div>
+        </div>
+
+        <div class="terms-toggle-box">
+            <button id="terms-toggle-btn" class="terms-toggle-btn" type="button" aria-expanded="false" aria-controls="terms-section" disabled>
+                Ver términos del crédito
+            </button>
+        </div>
+
+        <div id="terms-section" hidden>
+            <h3 class="text__center text-ris">Términos del crédito</h3>
+            <div class="terms">
+                <p> 
+                    <span>Valor Cuota:</span>
+                    <strong id="vlr__cuota">$53</strong>
+                </p>
+
+                <p> 
+                    <span>Fianza Anticipada:</span>
+                    <span class="fianza-anticipada-wrap">
+                        <strong id="fianza__anticipada">$53</strong>
+                        <span class="floating-rates-card" id="floating-rates-card">
+                            <span>Fianza Anticipada: <strong id="rate__fianza_inicial">0%</strong></span>
+                            <span>IVA: <strong id="rate__iva">0%</strong></span>
+                        </span>
+                    </span>
+                </p>
+
+                <p> 
+                    <span>Intereses:</span>
+                    <span class="fianza-anticipada-wrap">
+                        <strong id="intereses">$53</strong>
+                        <span class="floating-rates-card floating-rates-card--single">
+                            <strong id="rate__monthly_interest">0%</strong>
+                        </span>
+                    </span>
+                </p>
+
+                <p> 
+                    <span>Fianza Regular:</span>
+                    <span class="fianza-anticipada-wrap">
+                        <strong id="fianza__regular">$53</strong>
+                        <span class="floating-rates-card" id="floating-rates-card-regular">
+                            <span>Fianza Regular: <strong id="rate__fianza_regular">0%</strong></span>
+                            <span>IVA: <strong id="rate__iva_regular">0%</strong></span>
+                        </span>
+                    </span>
+                </p>
+
+                <p> 
+                    <span>Seguro:</span>
+                    <span class="fianza-anticipada-wrap">
+                        <strong id="seguro">$53</strong>
+                        <span class="floating-rates-card floating-rates-card--single">
+                            <strong id="rate__insurance">0%</strong>
+                        </span>
+                    </span>
+                </p>
+
+                <p> 
+                    <span>Cuota de Administración:</span>
+                    <strong id="cuota__administracion">$53</strong>
+                </p>
+
+                <p> 
+                    <span>Valor a Desembolsar:</span>
+                    <strong id="valor__desembolsar">$53</strong>
+                </p>
+            </div>
+        </div>
+
+        <!--
+        Bloque original de resumen movido arriba, antes de Términos del crédito.
+        <div class="Summary">
+            <h3 class="text__center text-ris">Resumen de la simulación</h3>
+            <div class="summary__rows">
+                <p>
+                    <span>Cuota Inicio:</span>
+                    <strong id="summary__cuota_inicio">$0,00</strong>
+                </p>
+                <p>
+                    <span id="summary__cuota_label">Cuota 2 a 1:</span>
+                    <strong id="summary__cuota_restante">$0,00</strong>
+                </p>
+                <p>
+                    <span>Cuota de administración:</span>
+                    <strong id="summary__admin_fee">$0,00</strong>
+                </p>
+                <p>
+                    <span>Seguro mensual:</span>
+                    <strong id="summary__insurance">$0,00</strong>
+                </p>
+            </div>
+        </div>
+        -->
+
+        <div class="info-data-box">
+            <button id="info-data-btn" class="info-data-btn" type="button" aria-expanded="false" aria-controls="info-data-panel">
+                <img src="https://images.icon-icons.com/3720/PNG/512/communication_info_data_learning_book_information_icon_230372.png" alt="info">
+                <span>Info legal</span>
+            </button>
+            <div id="info-data-panel" class="info-data-panel" hidden>
+                <p>La Entidad pone a tu disposición este simulador en los términos de ley; su propósito es únicamente informativo y no constituye una oferta ni un compromiso de contratación.</p>
+                <p>Este simulador es indicativo y está diseñado para darte estimaciones generales, basadas en los datos que tú mismo ingreses.</p>
+                <p>Los resultados de la simulación no implican ninguna certificación ni recomendación de tipo comercial, contable, tributario o legal.</p>
+                <p>El simulador y la información que genera son propiedad de la Entidad. Queda prohibida su reproducción, venta, publicación, modificación, difusión o uso comercial sin autorización.</p>
+                <p>Las condiciones usadas en la simulación se basan en los parámetros del mercado vigentes al momento de su ejecución. La tasa de interés aplicable será la que la Entidad tenga establecida en ese instante.</p>
+            </div>
+        </div>
+
+        <div class="info-Ris">
+            <p class="paragraph">
+                Tasa de interés del 28.79% Efectivo Anual.
+            </p>
+            <p class="paragraph">
+            El simulador muestra únicamente los costos de la utilización que estás calculando. Si realizas otra utilización, los
+            costos asociados a ese nuevo valor se sumarán a tu cuota mensual. La cuota de administración se cobra una sola vez
+            al mes, sin importar cuántas utilizaciones realices.
+            </p>
+        </div>
+
+        <script src="../js/calculo.js"></script>
+
+    </body>
