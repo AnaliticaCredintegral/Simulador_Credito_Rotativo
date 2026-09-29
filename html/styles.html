@@ -1,0 +1,625 @@
+﻿<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* =========================
+   VARIABLES GLOBALES
+   ========================= */
+:root {
+    --color-bg: #005b45;
+    --color-bg-soft: #0b7a5f;
+    --color-surface: #ffffff;
+    --color-text: #1c2b25;
+    --color-text-muted: #587066;
+    --color-border: #198462;
+    --color-focus: #23a87d;
+    --color-money: #007a49;
+    --color-money-strong: #005f39;
+    --color-alert-bg: #f6fffb;
+    --color-alert-text: #0f6b50;
+
+    --radius-card: 16px;
+    --radius-control: 12px;
+    --radius-pill: 999px;
+
+    --space-1: 8px;
+    --space-2: 16px;
+    --space-3: 24px;
+    --space-4: 32px;
+
+    --shadow-card: 0 16px 44px rgba(0, 0, 0, 0.16);
+    --shadow-soft: 0 8px 20px rgba(0, 0, 0, 0.08);
+    --transition-fast: 180ms ease;
+}
+
+/* =========================
+   RESET Y BASE
+   ========================= */
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+html {
+    background: radial-gradient(circle at 20% 10%, #0b6f55 0%, var(--color-bg) 45%, #004334 100%);
+}
+
+body {
+    width: 100%;
+    max-width: 780px;
+    margin: var(--space-4) auto;
+    padding: var(--space-4);
+    border-radius: var(--radius-card);
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-card);
+    color: var(--color-text);
+    font-family: 'Poppins', sans-serif;
+}
+
+img {
+    max-width: 168px;
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+h2,
+h3,
+h4,
+p {
+    margin: 0;
+}
+
+/* =========================
+   UTILIDADES
+   ========================= */
+.text__center {
+    text-align: center;
+}
+
+.text-ris {
+    color: var(--color-bg);
+}
+
+/* =========================
+   CABECERA / RESUMEN
+   ========================= */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-3);
+}
+
+.container h2 {
+    font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+    line-height: 1.2;
+    color: var(--color-text);
+}
+
+.container h4 {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+}
+
+.monto {
+    padding: var(--space-1) var(--space-3);
+    border: 1px solid #d8ece4;
+    border-radius: var(--radius-pill);
+    background: #f5fcf9;
+    box-shadow: var(--shadow-soft);
+    transition: background-color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.monto--low {
+    background: #fff6f2;
+    border-color: #f1c3b4;
+    transform: translateY(-1px);
+}
+
+.monto--normal {
+    background: #f5fcf9;
+    border-color: #d8ece4;
+}
+
+.monto--high {
+    background: #edfbf5;
+    border-color: #97d8bf;
+    transform: translateY(-1px);
+}
+
+#monto-valor {
+    font-size: clamp(1.5rem, 2.8vw, 2rem);
+    color: var(--color-money-strong);
+}
+
+/* =========================
+   FORMULARIO
+   ========================= */
+.form-row {
+    display: grid;
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
+}
+
+.form-row--2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.field--floating {
+    position: relative;
+}
+
+.field h4 {
+    color: var(--color-text);
+    font-size: 0.98rem;
+}
+
+.input {
+    width: 100%;
+    min-height: 48px;
+    padding: 0 var(--space-2);
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-control);
+    outline: none;
+    font-size: 1rem;
+    color: var(--color-text);
+    background-color: #ffffff;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+
+.input::placeholder {
+    color: #8aa89d;
+}
+
+.input:focus {
+    border-color: var(--color-focus);
+    box-shadow: 0 0 0 4px rgba(35, 168, 125, 0.15);
+    transform: translateY(-1px);
+}
+
+.slider-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.input--range {
+    min-height: auto;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    transform: none;
+    background: transparent;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.input--range:focus {
+    border-color: transparent;
+    box-shadow: none;
+    transform: none;
+}
+
+.input--range::-webkit-slider-runnable-track {
+    height: 14px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #0b7a5f 0%, #24b083 100%);
+}
+
+.input--range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 36px;
+    height: 36px;
+    margin-top: -11px;
+    border: 2px solid #0b7a5f;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+    cursor: pointer;
+}
+
+.input--range::-moz-range-track {
+    height: 14px;
+    border: none;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #0b7a5f 0%, #24b083 100%);
+}
+
+.input--range::-moz-range-thumb {
+    width: 36px;
+    height: 36px;
+    border: 2px solid #0b7a5f;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+    cursor: pointer;
+}
+
+.slider-value {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+}
+
+.slider-value strong {
+    color: var(--color-money-strong);
+}
+
+.hint {
+    font-size: 0.82rem;
+    color: var(--color-text-muted);
+    text-align: center;
+}
+
+.floating-input-alert {
+    position: absolute;
+    top: 78px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-6px);
+    padding: 6px 10px;
+    border-radius: 10px;
+    border: 1px solid #e5b9b9;
+    background: #fff5f5;
+    color: #8a3131;
+    font-size: 0.78rem;
+    line-height: 1.2;
+    text-align: center;
+    white-space: normal;
+    max-width: min(92vw, 360px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity var(--transition-fast), transform var(--transition-fast), visibility var(--transition-fast);
+    z-index: 2;
+}
+
+.floating-input-alert.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* =========================
+   ALERTA
+   ========================= */
+.min-alert {
+    display: none;
+    margin-bottom: var(--space-3);
+    padding: var(--space-2);
+    text-align: center;
+    border-radius: 12px;
+    border: 1px solid #bde6d8;
+    background-color: var(--color-alert-bg);
+    color: var(--color-alert-text);
+    font-size: 0.92rem;
+    line-height: 1.45;
+}
+
+.min-alert.is-visible {
+    display: block;
+}
+
+/* =========================
+   TERMINOS DEL CREDITO
+   ========================= */
+.terms {
+    display: grid;
+    gap: var(--space-1);
+    margin-top: var(--space-2);
+    margin-bottom: var(--space-3);
+    padding: var(--space-2);
+    border: 1px solid #e1f0ea;
+    border-radius: 14px;
+    background: #fcfffd;
+}
+
+.terms p {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-1) 0;
+    border-bottom: 1px dashed #d3e8df;
+}
+
+.terms p:last-child {
+    border-bottom: none;
+}
+
+.terms span {
+    font-size: 0.95rem;
+    color: var(--color-text);
+}
+
+.terms strong {
+    font-size: 0.98rem;
+    color: var(--color-money-strong);
+    font-weight: 700;
+}
+
+#vlr__cuota,
+#fianza__anticipada,
+#intereses,
+#fianza__regular,
+#seguro,
+#cuota__administracion,
+#valor__desembolsar,
+#summary__cuota_inicio,
+#summary__cuota_restante,
+#summary__admin_fee,
+#summary__insurance {
+    color: var(--color-money);
+}
+
+/* =========================
+   SUMMARY
+   ========================= */
+.Summary {
+    margin-bottom: var(--space-3);
+    padding: var(--space-2);
+    border: 1px solid #d8ece4;
+    border-radius: 14px;
+    background: #f9fffc;
+}
+
+.Summary h3 {
+    margin-bottom: var(--space-2);
+}
+
+.terms-toggle-box {
+    display: flex;
+    justify-content: center;
+    margin-bottom: var(--space-2);
+}
+
+.terms-toggle-btn {
+    min-height: 42px;
+    padding: 8px 16px;
+    border: 1px solid #b6ddd0;
+    border-radius: 12px;
+    background: #f5fcf9;
+    color: var(--color-bg);
+    font-size: 0.92rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+.terms-toggle-btn:hover {
+    background-color: #e9f8f2;
+    border-color: #8ccfb9;
+    transform: translateY(-1px);
+}
+
+.terms-toggle-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+    transform: none;
+}
+
+.summary__rows {
+    display: grid;
+    gap: var(--space-1);
+}
+
+.summary__rows p {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-1) 0;
+    border-bottom: 1px dashed #d3e8df;
+}
+
+.summary__rows p[hidden] {
+    display: none;
+}
+
+.summary__rows p:last-child {
+    border-bottom: none;
+}
+
+/* =========================
+   TARJETA FLOTANTE TASAS
+   ========================= */
+.fianza-anticipada-wrap {
+    display: inline-flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    gap: var(--space-1);
+}
+
+.floating-rates-card {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: 4px 8px;
+    border-radius: 999px;
+    border: 1px solid #cde9de;
+    background: #f5fcf9;
+    box-shadow: none;
+}
+
+.floating-rates-card span {
+    font-size: 0.78rem;
+    line-height: 1.2;
+    color: var(--color-text);
+}
+
+.floating-rates-card strong {
+    color: var(--color-money-strong);
+}
+
+.floating-rates-card--single {
+    padding: 2px 8px;
+}
+
+/* =========================
+   BOTON INFO LEGAL
+   ========================= */
+.info-data-box {
+    margin-bottom: var(--space-3);
+}
+
+.info-data-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 34px;
+    padding: 6px 10px;
+    border: 1px solid #b6ddd0;
+    border-radius: 10px;
+    background: #f5fcf9;
+    color: var(--color-bg);
+    font-size: 0.86rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.info-data-btn img {
+    width: 16px;
+    height: 16px;
+}
+
+.info-data-btn:hover {
+    background-color: #e9f8f2;
+    border-color: #8ccfb9;
+}
+
+.info-data-panel {
+    margin-top: var(--space-1);
+    padding: var(--space-2);
+    border: 1px solid #d8ece4;
+    border-radius: 12px;
+    background: #fbfffd;
+}
+
+.info-data-panel p {
+    font-size: 0.87rem;
+    line-height: 1.5;
+    color: var(--color-text);
+}
+
+.info-data-panel p + p {
+    margin-top: var(--space-1);
+}
+
+/* =========================
+   CAJA INFORMATIVA VERDE
+   ========================= */
+.info-Ris {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-top: var(--space-3);
+    padding: var(--space-3);
+    border-radius: var(--radius-card);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: linear-gradient(140deg, var(--color-bg-soft) 0%, var(--color-bg) 100%);
+    box-shadow: var(--shadow-soft);
+    color: #ffffff;
+}
+
+.paragraph {
+    color: rgba(255, 255, 255, 0.94);
+    line-height: 1.5;
+    font-size: 0.95rem;
+}
+
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+@media (max-width: 900px) {
+    body {
+        width: 100%;
+        max-width: 760px;
+        margin: var(--space-3) auto;
+        padding: var(--space-3);
+    }
+
+    .info-Ris {
+        margin-top: var(--space-3);
+        padding: var(--space-3);
+    }
+}
+
+@media (max-width: 720px) {
+    .form-row--2 {
+        grid-template-columns: 1fr;
+    }
+
+    .terms {
+        padding: var(--space-2);
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        width: 100%;
+        margin: 0;
+        padding: var(--space-2);
+        border-radius: 0;
+    }
+
+    .container {
+        gap: var(--space-1);
+    }
+
+    .terms p {
+        gap: var(--space-1);
+        align-items: start;
+    }
+
+    .fianza-anticipada-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 4px;
+    }
+
+    .floating-rates-card {
+        max-width: 170px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        border-radius: 10px;
+        padding: 4px 6px;
+    }
+
+    .floating-rates-card span {
+        font-size: 0.7rem;
+    }
+
+    .info-Ris {
+        margin-top: var(--space-2);
+        padding: var(--space-2);
+        border-radius: 14px;
+    }
+
+    .info-data-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+}
+</style>
+
